@@ -1,0 +1,138 @@
+<main>
+  <header>
+
+    <app-menu></app-menu>
+
+    <h1 id="titulo-dash">Dashboard FORD</h1>
+
+  </header>
+
+  <div class="header-main">
+
+    <div class="veiculo-box">
+      <label for="veiculo-select">Veículo</label>
+      <select id="veiculo-select" (change)="veiculoEscolhido($event)">
+        <option value="" selected disabled hidden>Selecione uma opção</option>
+        <option value="" *ngFor="let v of veiculos" [value]="v.id">
+          {{v.vehicle}}
+        </option>
+        <!-- <option value="">Territory</option>
+        <option value="">Bronco Sport</option> -->
+      </select>
+    </div>
+
+    <div class="info-box">
+      <span>Total de Vendas</span>
+      <strong id="vendas">1500</strong>
+      <small>Unid.</small>
+    </div>
+
+    <div class="info-box">
+      <span>Conectados</span>
+      <strong id="conectados">500</strong>
+      <small>Unid.</small>
+    </div>
+
+    <div class="info-box">
+      <span>Update Software</span>
+      <strong id="updates">750</strong>
+      <small>Unid.</small>
+    </div>
+
+  </div>
+
+  <section class="veiculo-display" aria-live="polite">
+    <img id="veiculo-image" src="img/mustang.png" alt="Ford Mustang">
+  </section>
+
+  <div class="container-table-veiculos">
+    <table>
+      <thead>
+        <tr>
+          <th>Código - Vin</th>
+          <th>Odômetro</th>
+          <th>Nível de Combustível</th>
+          <th>Status</th>
+          <th>Lat.</th>
+          <th>Long.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="vin">2FMDK3AK2FBB023455</td>
+          <td id="odometro">50000 Km</td>
+          <td id="combustivel">90 %</td>
+          <td id="status">on</td>
+          <td>-12,2322</td>
+          <td>-35,2314</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>
+  const veiculoData = {
+    ranger: {
+      image: 'img/ranger.png',
+      alt: 'Ford Ranger',
+      sales: '4560',
+      updates: '3050',
+      vin: '2FMPK4K92LBA17483',
+      odometer: '10000 Km',
+      fuel: '25 %',
+      status: 'off'
+    },
+    mustang: {
+      image: 'img/mustang.png',
+      alt: 'Ford Mustang',
+      sales: '1500',
+      updates: '750',
+      vin: '2FMDK3AK2FBB023455',
+      odometer: '50000 Km',
+      fuel: '90 %',
+      status: 'on'
+    },
+    territory: {
+      image: 'img/territory.png',
+      alt: 'Ford Territory',
+      sales: '4560',
+      updates: '3050',
+      vin: '2FMAK4K92LBA17483',
+      odometer: '10000 Km',
+      fuel: '25 %',
+      status: 'off'
+    },
+    broncoSport: {
+      image: 'img/broncoSport.png',
+      alt: 'Ford Bronco Sport',
+      sales: '2450',
+      updates: '1250',
+      vin: '3FMCR9B60MRA12345',
+      odometer: '25000 Km',
+      fuel: '70 %',
+      status: 'on'
+    }
+  };
+
+  document.getElementById('veiculo-select').addEventListener('change', function () {
+    const vehicle = veiculoData[this.value];
+    document.getElementById('veiculo-image').src = vehicle.image;
+    document.getElementById('veiculo-image').alt = vehicle.alt;
+    document.getElementById('vendas').textContent = vehicle.sales;
+    document.getElementById('updates').textContent = vehicle.updates;
+    document.getElementById('vin').textContent = vehicle.vin;
+    document.getElementById('odometro').textContent = vehicle.odometer;
+    document.getElementById('combustivel').textContent = vehicle.fuel;
+    document.getElementById('status').textContent = vehicle.status;
+  });
+
+  function clickMenu() {
+
+    const itens = document.getElementById('itens');
+    itens.classList.toggle('aberto');
+
+  }
+
+</script>

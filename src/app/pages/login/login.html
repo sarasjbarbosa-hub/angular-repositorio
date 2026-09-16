@@ -1,0 +1,65 @@
+ <main>
+   <div class="carro-login">
+     <img src="/img/ranger.png" alt="Ranger">
+   </div>
+
+   <div class="lado-direito-login">
+     <div class="itens-login">
+
+       <div class="logo-login">
+         <img src="img/ford.png" alt="logo-ford" class="logo">
+       </div>
+
+       <form #loginForm="ngForm" (ngSubmit)="login(usuario)">
+
+         <h2 id="texto-principal-login">Boas-vindas</h2>
+
+         <div class="usuario-formulario">
+           <div class="input-container">
+             <i class="fa-regular fa-user icone-esquerdo"></i>
+             <label for="usuário-login"></label>
+             <input [(ngModel)]="usuario.nome" type="text" id="nome" name="nome" autocomplete="username"
+               placeholder="Insira seu usuário" required>
+             <i class="fa-solid fa-circle-info icone-direito"></i>
+           </div>
+         </div>
+
+         <div class="senha-formulario">
+           <div class="input-container">
+             <i class="fa-solid fa-lock icone-esquerdo"></i>
+             <label for="senha"></label>
+             <input type="password" id="senha" name="senha" autocomplete="current-password"
+               placeholder="Insira sua senha" [(ngModel)]="usuario.senha" required>
+             <i class="fa-solid fa-circle-info icone-direito"></i>
+           </div>
+         </div>
+
+         <div class="opcoes-extras">
+           <span>Logar automaticamente</span>
+           <label class="switch">
+             <input type="checkbox" name="lembrar">
+             <span class="slider"></span>
+           </label>
+         </div>
+
+         <button type="submit">Entrar</button>
+       </form>
+
+     </div>
+   </div>
+ </main>
+
+ <script>
+   const formLogin = document.querySelector('form');
+   formLogin.addEventListener('submit', function (event) {
+     event.preventDefault();
+
+     const email = document.getElementById('usuário').value;
+     const senha = document.getElementById('senha').value;
+
+     if (email && senha) {
+       window.location.href = 'home.html';
+     }
+   });
+
+ </script>

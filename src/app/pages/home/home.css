@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  padding: 10px;
+}
+
+menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: min(280px, 100vw);
+  height: 100dvh;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  padding: 80px 20px 20px 20px;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 9;
+}
+menu.aberto {
+  transform: translateX(0);
+}
+
+#menu-hamb {
+  color: rgb(25, 185, 132);
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  font-size: 32px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#menu-hamb:hover {
+  background-color: rgb(215, 241, 232);
+}
+
+#itens ul {
+  list-style: none;
+}
+
+#itens ul li a {
+  text-decoration: none;
+  color: #08a5f4;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+:host {
+  display: block;
+  background-color: #ffffff;
+  background-image: url('/img/ranger.png');
+  background-size: 70% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100dvh;
+}
+
+.cartao-de-boas-vindas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  width: 100%;
+  padding: 24px 16px;
+}
+
+.caixa-semitransparente {
+  width: min(700px, 100%);
+  min-height: 600px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #b5b5b5;
+  border-radius: 3%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecalho-cartao {
+  padding: 12px 20px;
+  font-family: Arial, sans-serif;
+  color: #727171;
+  border-bottom: 1px solid #907a7a;
+}
+
+.corpo-cartao {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.corpo-cartao h2 {
+  color: #08a5f4;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.usuario-formulario {
+  margin-bottom: 20px;
+}
+
+.logo-ford {
+  width: 90px;
+  padding-bottom: 20px;
+}
+
+.user-profile {
+  width: 131px;
+  height: 51px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: linear-gradient(to bottom right, #2e8eff 0%, rgba(46, 143, 255, 0.372) 30%);
+  background-color: rgba(46, 143, 255, 0.308);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  text-decoration: none;
+}
+
+.user-profile:hover,
+.user-profile:focus {
+  background-color: rgba(46, 142, 255, 0.7);
+  box-shadow: 0 0 10px rgba(46, 143, 255, 0.11);
+  outline: none;
+}
+
+.user-profile-inner {
+  width: 127px;
+  height: 47px;
+  border-radius: 13px;
+  background-color: #2442a4f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.user-profile-inner svg {
+  width: 27px;
+  height: 27px;
+  fill: #fff;
+}
+
+@media (max-width: 600px) {
+  menu {
+    padding: 72px 16px 16px;
+  }
+
+  .cartao-de-boas-vindas {
+    padding: 16px;
+  }
+
+  .caixa-semitransparente {
+    min-height: calc(100dvh - 32px);
+  }
+
+  .cabecalho-cartao {
+    padding: 12px 16px;
+  }
+
+  .cabecalho-cartao h3 {
+    font-size: 1.1rem;
+  }
+
+  .corpo-cartao {
+    padding: 24px 16px;
+  }
+
+  .corpo-cartao h2 {
+    font-size: 1.15rem;
+  }
+
+  .user-profile {
+    width: calc(100% - 32px);
+  }
+
+  .user-profile-inner {
+    width: 100%;
+  }
+}
