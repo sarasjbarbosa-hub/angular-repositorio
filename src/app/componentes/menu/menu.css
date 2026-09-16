@@ -37,13 +37,32 @@ menu.aberto {
 }
 
 #menu-hamb {
+  appearance: none;
+  background: transparent;
+  border: 0;
   color: rgb(25, 185, 132);
   cursor: pointer;
+  display: block;
   position: relative;
   z-index: 10;
-  font-size: 32px;
-  padding: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   border-radius: 5px;
+}
+
+#menu-hamb::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 8px;
+  width: 26px;
+  height: 3px;
+  border-radius: 3px;
+  background: currentColor;
+  box-shadow:
+    0 8px currentColor,
+    0 16px currentColor;
 }
 
 #menu-hamb:hover {

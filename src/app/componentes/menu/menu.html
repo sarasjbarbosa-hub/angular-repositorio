@@ -1,14 +1,14 @@
     <header>
       <nav>
-        <span id="menu-hamb" class="material-symbols-outlined" onclick="clickMenu()">menu</span>
-        <menu id="itens">
-          <img src="img/ford.png" alt="Logo Ford" class="logo-ford">
+        <button id="menu-hamb" type="button" (click)="alternarMenu()" aria-label="Abrir menu"></button>
+        <menu id="itens" [class.aberto]="menuAberto">
+          <img src="/img/ford.png" alt="Logo Ford" class="logo-ford">
           <ul>
-            <li class="ativo"><a href="home.html">Home</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
+            <li routerLinkActive="ativo"><a routerLink="/home">Home</a></li>
+            <li routerLinkActive="ativo"><a routerLink="/dashboard">Dashboard</a></li>
           </ul>
 
-          <a href="login.html" aria-label="Logout" class="user-perfil">
+          <a routerLink="/login" (click)="logout()" aria-label="Logout" class="user-perfil">
             <div class="user-perfil-cont">
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g data-name="Layer 2" id="Layer_2">
