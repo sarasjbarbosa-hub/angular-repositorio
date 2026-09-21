@@ -139,20 +139,101 @@
   border-color: #9eabc0;
   background: #f2f0eb;
 }
-.data-map-list { display: grid; gap: 10px; }
-.data-map-card { overflow: hidden; border: 1px solid #dedbd5; border-radius: 9px; background: #fff; }
-.data-map-card header { display: flex; align-items: center; justify-content: space-between; gap: 14px; border-bottom: 1px solid #dedbd5; background: #faf9f6; padding: 14px 16px; }
-.data-map-card header strong { color: #202633; font: 600 13px Arial, sans-serif; }
-.data-map-card header span { color: #71809b; font: 10px 'Courier New', monospace; }
-.data-map-body { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 16px; }
-.data-map-body label { display: block; margin-bottom: 8px; color: #7083a5; font: 10px 'Courier New', monospace; letter-spacing: .1em; text-transform: uppercase; }
-.data-map-body ul { display: grid; gap: 7px; margin: 0; padding-left: 12px; color: #46546d; font: 12px Arial, sans-serif; }
-.data-map-body li::marker { color: #d4d0c8; }
-.data-map-body > div > strong { color: #33415a; font: 600 12px Arial, sans-serif; }
-.dpo-card { border: 1px solid #dedbd5; border-radius: 9px; padding: 20px; }
-.dpo-card h2 { margin: 0 0 10px; color: #202633; font: 600 16px Georgia, serif; }
-.dpo-card p { color: #71809b; font: 13px/1.6 Arial, sans-serif; }
-.dpo-card button { border: 1px solid #dedbd5; border-radius: 5px; background: #faf9f6; color: #283b5c; cursor: pointer; font: 11px Arial, sans-serif; padding: 9px 12px; }
+.data-map-list {
+  display: grid;
+  gap: 10px;
+}
+.data-map-card {
+  overflow: hidden;
+  border: 1px solid #dedbd5;
+  border-radius: 9px;
+  background: #fff;
+}
+.data-map-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid #dedbd5;
+  background: #faf9f6;
+  padding: 14px 16px;
+}
+.data-map-card header strong {
+  color: #202633;
+  font:
+    600 13px Arial,
+    sans-serif;
+}
+.data-map-card header span {
+  color: #71809b;
+  font:
+    10px 'Courier New',
+    monospace;
+}
+.data-map-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding: 16px;
+}
+.data-map-body label {
+  display: block;
+  margin-bottom: 8px;
+  color: #7083a5;
+  font:
+    10px 'Courier New',
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.data-map-body ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 12px;
+  color: #46546d;
+  font:
+    12px Arial,
+    sans-serif;
+}
+.data-map-body li::marker {
+  color: #d4d0c8;
+}
+.data-map-body > div > strong {
+  color: #33415a;
+  font:
+    600 12px Arial,
+    sans-serif;
+}
+.dpo-card {
+  border: 1px solid #dedbd5;
+  border-radius: 9px;
+  padding: 20px;
+}
+.dpo-card h2 {
+  margin: 0 0 10px;
+  color: #202633;
+  font:
+    600 16px Georgia,
+    serif;
+}
+.dpo-card p {
+  color: #71809b;
+  font:
+    13px/1.6 Arial,
+    sans-serif;
+}
+.dpo-card button {
+  border: 1px solid #dedbd5;
+  border-radius: 5px;
+  background: #faf9f6;
+  color: #283b5c;
+  cursor: pointer;
+  font:
+    11px Arial,
+    sans-serif;
+  padding: 9px 12px;
+}
 @media (max-width: 780px) {
   .privacy-page {
     margin-left: 0;
@@ -163,6 +244,13 @@
   .rights-grid {
     grid-template-columns: 1fr;
   }
-  .data-map-body { grid-template-columns: 1fr; gap: 16px; }
-  .data-map-card header { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .data-map-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .data-map-card header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
 }

@@ -3,12 +3,12 @@
     <div class="brand"><span class="brand-mark">▤</span><strong>Clausula</strong></div>
     <nav aria-label="Navegação principal">
       <span class="nav-label">Contratos</span>
-      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
-        (click)="setSection('contracts')"><span>▤</span> Todos <b>5</b></button>
-      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
-        (click)="setSection('contracts')"><span>◷</span> A vencer <b>1</b></button>
-      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
-        (click)="setSection('contracts')"><span>□</span> Rascunhos <b>1</b></button>
+      <button class="nav-item" [class.active]="activeSection === 'contracts' && contractFilter === 'all'" type="button"
+        (click)="setContractFilter('all')"><span>▤</span> Todos <b>5</b></button>
+      <button class="nav-item" [class.active]="activeSection === 'contracts' && contractFilter === 'due'" type="button"
+        (click)="setContractFilter('due')"><span>◷</span> A vencer <b>1</b></button>
+      <button class="nav-item" [class.active]="activeSection === 'contracts' && contractFilter === 'drafts'"
+        type="button" (click)="setContractFilter('drafts')"><span>□</span> Rascunhos <b>1</b></button>
       <span class="nav-label compliance">Conformidade</span>
       <button class="nav-item" [class.active]="activeSection === 'privacy'" type="button"
         (click)="setSection('privacy')"><span class="lock">▣</span> Privacidade &amp; LGPD</button>
@@ -20,7 +20,9 @@
   </aside>
 
   <section class="contract-list" *ngIf="activeSection === 'contracts'" aria-label="Lista de contratos">
-    <h1>Todos os contratos</h1>
+    <h1>
+      {{ contractFilter === 'due' ? 'Contratos a vencer' : contractFilter === 'drafts' ? 'Rascunhos' : 'Todos os contratos' }}
+    </h1>
     <label class="search-box">
       <span>⌕</span>
       <input type="search" [(ngModel)]="search" placeholder="Buscar contratos..." aria-label="Buscar contratos">
@@ -110,10 +112,11 @@
       <div class="compliance-status"><i></i> Em conformidade com a LGPD <span>·</span> Atualizado em set/2026</div>
     </header>
     <div class="privacy-tabs"><button class="privacy-tab" [class.active]="privacyTab === 'rights'" type="button"
-      (click)="setPrivacyTab('rights')">Direitos do Titular</button><button class="privacy-tab"
-      [class.active]="privacyTab === 'map'" type="button" (click)="setPrivacyTab('map')">Mapa de Dados</button><button
-      class="privacy-tab" [class.active]="privacyTab === 'dpo'" type="button" (click)="setPrivacyTab('dpo')">Encarregado
-      (DPO)</button></div>
+        (click)="setPrivacyTab('rights')">Direitos do Titular</button><button class="privacy-tab"
+        [class.active]="privacyTab === 'map'" type="button" (click)="setPrivacyTab('map')">Mapa de Dados</button><button
+        class="privacy-tab" [class.active]="privacyTab === 'dpo'" type="button"
+        (click)="setPrivacyTab('dpo')">Encarregado
+        (DPO)</button></div>
     <section class="privacy-content" *ngIf="privacyTab === 'rights'">
       <p class="privacy-intro">Como titular de dados, você possui os direitos abaixo garantidos pela LGPD. Todas as
         solicitações são respondidas em até <strong>15 dias úteis</strong>, conforme Art. 18, §5º.</p>
@@ -163,25 +166,58 @@
       </div>
     </section>
     <section class="privacy-content data-map" *ngIf="privacyTab === 'map'">
-      <p class="privacy-intro">Inventário de dados pessoais tratados pela Clausula, suas finalidades, base legal e prazos de retenção conforme a LGPD.</p>
+      <p class="privacy-intro">Inventário de dados pessoais tratados pela Clausula, suas finalidades, base legal e
+        prazos de retenção conforme a LGPD.</p>
       <div class="data-map-list">
         <article class="data-map-card">
           <header><strong>Dados de identificação</strong><span>Retenção: 5 anos após encerramento</span></header>
-          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Nome completo</li><li>CPF / CNPJ</li><li>E-mail corporativo</li></ul></div><div><label>Base legal</label><strong>Execução de contrato</strong></div></div>
+          <div class="data-map-body">
+            <div><label>Dados coletados</label>
+              <ul>
+                <li>Nome completo</li>
+                <li>CPF / CNPJ</li>
+                <li>E-mail corporativo</li>
+              </ul>
+            </div>
+            <div><label>Base legal</label><strong>Execução de contrato</strong></div>
+          </div>
         </article>
         <article class="data-map-card">
           <header><strong>Dados de acesso</strong><span>Retenção: 12 meses</span></header>
-          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Endereço IP</li><li>Logs de sessão</li><li>Dispositivo utilizado</li></ul></div><div><label>Base legal</label><strong>Legítimo interesse (segurança)</strong></div></div>
+          <div class="data-map-body">
+            <div><label>Dados coletados</label>
+              <ul>
+                <li>Endereço IP</li>
+                <li>Logs de sessão</li>
+                <li>Dispositivo utilizado</li>
+              </ul>
+            </div>
+            <div><label>Base legal</label><strong>Legítimo interesse (segurança)</strong></div>
+          </div>
         </article>
         <article class="data-map-card">
           <header><strong>Dados contratuais</strong><span>Retenção: 10 anos (obrigação legal)</span></header>
-          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Contratos assinados</li><li>Histórico de cláusulas</li><li>Registros de aprovação</li></ul></div><div><label>Base legal</label><strong>Execução de contrato</strong></div></div>
+          <div class="data-map-body">
+            <div><label>Dados coletados</label>
+              <ul>
+                <li>Contratos assinados</li>
+                <li>Histórico de cláusulas</li>
+                <li>Registros de aprovação</li>
+              </ul>
+            </div>
+            <div><label>Base legal</label><strong>Execução de contrato</strong></div>
+          </div>
         </article>
       </div>
     </section>
     <section class="privacy-content" *ngIf="privacyTab === 'dpo'">
-      <p class="privacy-intro">O encarregado pelo tratamento de dados atua como canal de comunicação entre os titulares, a Clausula e a ANPD.</p>
-      <article class="dpo-card"><h2>Encarregado de Dados (DPO)</h2><p>Entre em contato pelo canal de privacidade da organização para dúvidas e solicitações relacionadas ao tratamento de dados pessoais.</p><button type="button">Enviar solicitação →</button></article>
+      <p class="privacy-intro">O encarregado pelo tratamento de dados atua como canal de comunicação entre os titulares,
+        a Clausula e a ANPD.</p>
+      <article class="dpo-card">
+        <h2>Encarregado de Dados (DPO)</h2>
+        <p>Entre em contato pelo canal de privacidade da organização para dúvidas e solicitações relacionadas ao
+          tratamento de dados pessoais.</p><button type="button">Enviar solicitação →</button>
+      </article>
     </section>
   </main>
 

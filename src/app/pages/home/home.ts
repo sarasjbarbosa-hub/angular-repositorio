@@ -37,6 +37,7 @@ export class Home {
   selectedContract = 0;
   activeTab: 'overview' | 'clauses' = 'overview';
   activeSection: 'contracts' | 'privacy' = 'contracts';
+  contractFilter: 'all' | 'due' | 'drafts' = 'all';
   privacyTab: 'rights' | 'map' | 'dpo' = 'rights';
   expandedClause = 0;
   showPrivacy = true;
@@ -75,7 +76,10 @@ export class Home {
   get filteredContracts(): Contract[] {
     const query = this.search.toLowerCase().trim();
     return this.contracts.filter((contract) =>
-      !query || `${contract.title} ${contract.company}`.toLowerCase().includes(query),
+      (this.contractFilter === 'all' ||
+        (this.contractFilter === 'due' && contract.state === 'A VENCER') ||
+        (this.contractFilter === 'drafts' && contract.state === 'RASCUNHO')) &&
+      (!query || `${contract.title} ${contract.company}`.toLowerCase().includes(query)),
     );
   }
 
@@ -95,6 +99,15 @@ export class Home {
 
   setSection(section: 'contracts' | 'privacy'): void {
     this.activeSection = section;
+  }
+
+  setContractFilter(filter: 'all' | 'due' | 'drafts'): void {
+    this.activeSection = 'contracts';
+    this.contractFilter = filter;
+    const firstMatch = this.filteredContracts[0];
+    if (firstMatch) {
+      this.selectedContract = this.contracts.indexOf(firstMatch);
+    }
   }
 
   setPrivacyTab(tab: 'rights' | 'map' | 'dpo'): void {
