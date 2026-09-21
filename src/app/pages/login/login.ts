@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { Auth } from '../../services/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-login',
@@ -21,15 +19,15 @@ export class Login {
 
 mensagemDeErro: string | null = null;
 
-constructor(private auth: Auth, private router: Router) {}
+constructor(private router: Router) {}
 
 login(usuario: { nome: string; senha: string }) {
-  this.auth.login(usuario).subscribe({
-    next: () => this.router.navigate(['/home']),
-    error: (err: { error?: { message?: string } }) => {
-      this.mensagemDeErro =
-        err.error?.message ?? 'Ocorreu um erro ao tentar fazer login.';
-}
-});
+  if (!usuario.nome.trim() || !usuario.senha.trim()) {
+    this.mensagemDeErro = 'Preencha usuário e senha para continuar.';
+    return;
+  }
+
+  sessionStorage.setItem('auth-user', JSON.stringify(usuario));
+  this.router.navigate(['/home']);
 }
 }

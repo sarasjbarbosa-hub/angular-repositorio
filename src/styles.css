@@ -1,1 +1,168 @@
-/* You can add global styles to this file, and also import other style files */
+/* Shared styles for the privacy section. */
+.privacy-page {
+  min-height: 100vh;
+  margin-left: 202px;
+  padding: 30px 33px 100px;
+  color: #172033;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.privacy-header h1 {
+  margin: 0;
+  color: #101827;
+  font-size: 22px;
+}
+.privacy-header > p:not(.privacy-eyebrow) {
+  margin: 8px 0 18px;
+  color: #71809b;
+  font:
+    12px Arial,
+    sans-serif;
+}
+.privacy-eyebrow {
+  margin: 0 0 7px;
+  color: #71809b;
+  font:
+    10px 'Courier New',
+    monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.compliance-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 7px;
+  background: #e4f2ec;
+  color: #277354;
+  font:
+    11px 'Courier New',
+    monospace;
+  padding: 9px 13px;
+}
+.compliance-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #27805c;
+}
+.compliance-status span {
+  color: #91ae9f;
+}
+.privacy-tabs {
+  display: flex;
+  gap: 24px;
+  margin-top: 25px;
+  border-bottom: 1px solid #ddd9d2;
+}
+.privacy-tab {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #8793a8;
+  cursor: pointer;
+  font:
+    12px Arial,
+    sans-serif;
+  padding: 11px 0;
+}
+.privacy-tab.active {
+  border-color: #192a4a;
+  color: #1c2c48;
+  font-weight: 700;
+}
+.privacy-content {
+  max-width: 628px;
+  padding-top: 28px;
+}
+.privacy-intro {
+  margin: 0 0 24px;
+  color: #71809b;
+  font:
+    13px/1.6 Arial,
+    sans-serif;
+}
+.rights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.right-card {
+  min-height: 140px;
+  border: 1px solid #dedbd5;
+  border-radius: 9px;
+  padding: 16px;
+}
+.right-card > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.right-card h2 {
+  margin: 0;
+  color: #202633;
+  font:
+    600 13px Arial,
+    sans-serif;
+}
+.right-card span {
+  border-radius: 4px;
+  background: #efede8;
+  color: #8491a7;
+  font:
+    10px 'Courier New',
+    monospace;
+  padding: 4px 7px;
+}
+.right-card p {
+  min-height: 34px;
+  margin: 10px 0 12px;
+  color: #71809b;
+  font:
+    12px/1.5 Arial,
+    sans-serif;
+}
+.right-card button {
+  width: 100%;
+  border: 1px solid #dedbd5;
+  border-radius: 5px;
+  background: #faf9f6;
+  color: #283b5c;
+  cursor: pointer;
+  font:
+    11px Arial,
+    sans-serif;
+  padding: 8px;
+  text-align: left;
+}
+.right-card button:hover {
+  border-color: #9eabc0;
+  background: #f2f0eb;
+}
+.data-map-list { display: grid; gap: 10px; }
+.data-map-card { overflow: hidden; border: 1px solid #dedbd5; border-radius: 9px; background: #fff; }
+.data-map-card header { display: flex; align-items: center; justify-content: space-between; gap: 14px; border-bottom: 1px solid #dedbd5; background: #faf9f6; padding: 14px 16px; }
+.data-map-card header strong { color: #202633; font: 600 13px Arial, sans-serif; }
+.data-map-card header span { color: #71809b; font: 10px 'Courier New', monospace; }
+.data-map-body { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 16px; }
+.data-map-body label { display: block; margin-bottom: 8px; color: #7083a5; font: 10px 'Courier New', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.data-map-body ul { display: grid; gap: 7px; margin: 0; padding-left: 12px; color: #46546d; font: 12px Arial, sans-serif; }
+.data-map-body li::marker { color: #d4d0c8; }
+.data-map-body > div > strong { color: #33415a; font: 600 12px Arial, sans-serif; }
+.dpo-card { border: 1px solid #dedbd5; border-radius: 9px; padding: 20px; }
+.dpo-card h2 { margin: 0 0 10px; color: #202633; font: 600 16px Georgia, serif; }
+.dpo-card p { color: #71809b; font: 13px/1.6 Arial, sans-serif; }
+.dpo-card button { border: 1px solid #dedbd5; border-radius: 5px; background: #faf9f6; color: #283b5c; cursor: pointer; font: 11px Arial, sans-serif; padding: 9px 12px; }
+@media (max-width: 780px) {
+  .privacy-page {
+    margin-left: 0;
+    padding: 25px 20px 130px;
+  }
+}
+@media (max-width: 500px) {
+  .rights-grid {
+    grid-template-columns: 1fr;
+  }
+  .data-map-body { grid-template-columns: 1fr; gap: 16px; }
+  .data-map-card header { align-items: flex-start; flex-direction: column; gap: 6px; }
+}

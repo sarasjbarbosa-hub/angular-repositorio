@@ -48,18 +48,3 @@
      </div>
    </div>
  </main>
-
- <script>
-   const formLogin = document.querySelector('form');
-   formLogin.addEventListener('submit', function (event) {
-     event.preventDefault();
-
-     const email = document.getElementById('usuário').value;
-     const senha = document.getElementById('senha').value;
-
-     if (email && senha) {
-       window.location.href = 'home.html';
-     }
-   });
-
- </script>

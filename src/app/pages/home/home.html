@@ -1,30 +1,196 @@
-<header>
+<div class="contract-app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">▤</span><strong>Clausula</strong></div>
+    <nav aria-label="Navegação principal">
+      <span class="nav-label">Contratos</span>
+      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
+        (click)="setSection('contracts')"><span>▤</span> Todos <b>5</b></button>
+      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
+        (click)="setSection('contracts')"><span>◷</span> A vencer <b>1</b></button>
+      <button class="nav-item" [class.active]="activeSection === 'contracts'" type="button"
+        (click)="setSection('contracts')"><span>□</span> Rascunhos <b>1</b></button>
+      <span class="nav-label compliance">Conformidade</span>
+      <button class="nav-item" [class.active]="activeSection === 'privacy'" type="button"
+        (click)="setSection('privacy')"><span class="lock">▣</span> Privacidade &amp; LGPD</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button type="button" (click)="goToDashboard()">▦ <span>Dashboard da frota</span></button>
+      <button type="button" (click)="logout()">↪ <span>Sair da conta</span></button>
+    </div>
+  </aside>
 
-  <app-menu></app-menu>
+  <section class="contract-list" *ngIf="activeSection === 'contracts'" aria-label="Lista de contratos">
+    <h1>Todos os contratos</h1>
+    <label class="search-box">
+      <span>⌕</span>
+      <input type="search" [(ngModel)]="search" placeholder="Buscar contratos..." aria-label="Buscar contratos">
+    </label>
+    <button class="contract-item" type="button" *ngFor="let contract of filteredContracts"
+      [class.selected]="currentContract === contract" (click)="selectContract(contract)">
+      <strong>{{ contract.title }}</strong>
+      <span>{{ contract.company }}</span>
+      <small><em
+          [class.warning]="contract.state === 'A VENCER'">{{ contract.state }}</em><time>{{ contract.date }}</time></small>
+    </button>
+  </section>
 
-</header>
+  <main class="contract-detail" *ngIf="activeSection === 'contracts'">
+    <header class="detail-header">
+      <div>
+        <p class="eyebrow">Serviços</p>
+        <h2>{{ currentContract.title }}</h2>
+        <p class="company-name">{{ currentContract.company }} <span class="tag">DADOS PESSOAIS · LGPD</span></p>
+      </div>
+      <div class="header-actions"><button type="button">Exportar</button><button class="primary"
+          type="button">Assinar</button></div>
+    </header>
 
-<main class="cartao-de-boas-vindas">
-
-  <div class="caixa-semitransparente">
-
-    <div class="cabecalho-cartao">
-      <h3>Sistema de dados FORD</h3>
+    <div class="contract-facts">
+      <div><span>Valor total</span><strong>{{ currentContract.value }}</strong></div>
+      <div><span>Início</span><strong>{{ currentContract.start }}</strong></div>
+      <div><span>Vencimento</span><strong>{{ currentContract.end }}</strong></div>
+      <div><span>Dias restantes</span><strong
+          class="days-remaining">{{ currentContract.remainingDays === null ? '—' : currentContract.remainingDays + ' dias' }}</strong>
+      </div>
+      <div><span>Risco alto</span><strong class="risk-text">{{ currentContract.alerts.length || 2 }} cláusulas</strong>
+      </div>
     </div>
 
-    <div class="corpo-cartao">
-      <h2>Seja bem vindo(a) à Ford!</h2>
-    </div>
+    <div class="tabs"><button class="tab" [class.active]="activeTab === 'overview'" type="button"
+        (click)="setTab('overview')">Visão geral</button><button class="tab" [class.active]="activeTab === 'clauses'"
+        type="button" (click)="setTab('clauses')">Cláusulas ({{ currentContract.clauses.length || 5 }})</button></div>
+    <article class="detail-content" *ngIf="activeTab === 'overview'">
+      <h3>Resumo executivo</h3>
+      <p class="summary">{{ currentContract.summary }}</p>
 
+      <h3>Distribuição de risco</h3>
+      <div class="risk-grid">
+        <div class="risk-card high"><span>● &nbsp;Alto</span><strong>2</strong><small>cláusulas</small></div>
+        <div class="risk-card medium"><span>● &nbsp;Médio</span><strong>2</strong><small>cláusulas</small></div>
+        <div class="risk-card low"><span>● &nbsp;Baixo</span><strong>1</strong><small>cláusula</small></div>
+      </div>
+
+      <h3>Atenção imediata</h3>
+      <div class="alert-list">
+        <div class="alert" *ngFor="let alert of currentContract.alerts"><strong>△ &nbsp;{{ alert.title }}</strong>
+          <p>{{ alert.text }}</p>
+        </div>
+      </div>
+    </article>
+    <article class="clauses-content" *ngIf="activeTab === 'clauses'">
+      <p class="clauses-intro">Clique em uma cláusula para ver a versão simplificada ao lado do texto original.</p>
+      <div class="clause-list">
+        <section class="clause-card" *ngFor="let clause of currentContract.clauses; let i = index"
+          [class.expanded]="expandedClause === i">
+          <button class="clause-heading" type="button" (click)="toggleClause(i)"
+            [attr.aria-expanded]="expandedClause === i">
+            <span class="clause-title"><i [class]="clause.level.toLowerCase()">●</i> {{ clause.title }} <em
+                [class]="clause.level.toLowerCase()">{{ clause.level }}</em><em class="lgpd-tag"
+                *ngIf="clause.lgpd">LGPD</em></span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="clause-body" *ngIf="expandedClause === i">
+            <div class="simple-text"><span>Em linguagem simples</span>
+              <p>{{ clause.simple }}</p>
+            </div>
+            <div class="original-text"><span>Texto original</span>
+              <p>{{ clause.original }}</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <main class="privacy-page" *ngIf="activeSection === 'privacy'">
+    <header class="privacy-header">
+      <p class="privacy-eyebrow">Conformidade</p>
+      <h1>Privacidade &amp; LGPD</h1>
+      <p>Lei Geral de Proteção de Dados — Lei 13.709/2018 · Autoridade: ANPD</p>
+      <div class="compliance-status"><i></i> Em conformidade com a LGPD <span>·</span> Atualizado em set/2026</div>
+    </header>
+    <div class="privacy-tabs"><button class="privacy-tab" [class.active]="privacyTab === 'rights'" type="button"
+      (click)="setPrivacyTab('rights')">Direitos do Titular</button><button class="privacy-tab"
+      [class.active]="privacyTab === 'map'" type="button" (click)="setPrivacyTab('map')">Mapa de Dados</button><button
+      class="privacy-tab" [class.active]="privacyTab === 'dpo'" type="button" (click)="setPrivacyTab('dpo')">Encarregado
+      (DPO)</button></div>
+    <section class="privacy-content" *ngIf="privacyTab === 'rights'">
+      <p class="privacy-intro">Como titular de dados, você possui os direitos abaixo garantidos pela LGPD. Todas as
+        solicitações são respondidas em até <strong>15 dias úteis</strong>, conforme Art. 18, §5º.</p>
+      <div class="rights-grid">
+        <article class="right-card">
+          <div>
+            <h2>Acesso</h2><span>Art. 18, I</span>
+          </div>
+          <p>Confirmar se tratamos seus dados e obter cópia completa.</p><button type="button">Solicitar acesso
+            →</button>
+        </article>
+        <article class="right-card">
+          <div>
+            <h2>Correção</h2><span>Art. 18, III</span>
+          </div>
+          <p>Corrigir dados incompletos, inexatos ou desatualizados.</p><button type="button">Solicitar correção
+            →</button>
+        </article>
+        <article class="right-card">
+          <div>
+            <h2>Eliminação</h2><span>Art. 18, VI</span>
+          </div>
+          <p>Excluir dados desnecessários ou tratados em desconformidade.</p><button type="button">Solicitar exclusão
+            →</button>
+        </article>
+        <article class="right-card">
+          <div>
+            <h2>Portabilidade</h2><span>Art. 18, V</span>
+          </div>
+          <p>Receber seus dados em formato estruturado para uso em outro serviço.</p><button type="button">Exportar
+            dados →</button>
+        </article>
+        <article class="right-card">
+          <div>
+            <h2>Revogação</h2><span>Art. 18, IX</span>
+          </div>
+          <p>Revogar o consentimento a qualquer momento, sem ônus.</p><button type="button">Revogar consentimento
+            →</button>
+        </article>
+        <article class="right-card">
+          <div>
+            <h2>Oposição</h2><span>Art. 18, §2º</span>
+          </div>
+          <p>Se opor ao tratamento realizado com base em legítimo interesse.</p><button type="button">Registrar oposição
+            →</button>
+        </article>
+      </div>
+    </section>
+    <section class="privacy-content data-map" *ngIf="privacyTab === 'map'">
+      <p class="privacy-intro">Inventário de dados pessoais tratados pela Clausula, suas finalidades, base legal e prazos de retenção conforme a LGPD.</p>
+      <div class="data-map-list">
+        <article class="data-map-card">
+          <header><strong>Dados de identificação</strong><span>Retenção: 5 anos após encerramento</span></header>
+          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Nome completo</li><li>CPF / CNPJ</li><li>E-mail corporativo</li></ul></div><div><label>Base legal</label><strong>Execução de contrato</strong></div></div>
+        </article>
+        <article class="data-map-card">
+          <header><strong>Dados de acesso</strong><span>Retenção: 12 meses</span></header>
+          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Endereço IP</li><li>Logs de sessão</li><li>Dispositivo utilizado</li></ul></div><div><label>Base legal</label><strong>Legítimo interesse (segurança)</strong></div></div>
+        </article>
+        <article class="data-map-card">
+          <header><strong>Dados contratuais</strong><span>Retenção: 10 anos (obrigação legal)</span></header>
+          <div class="data-map-body"><div><label>Dados coletados</label><ul><li>Contratos assinados</li><li>Histórico de cláusulas</li><li>Registros de aprovação</li></ul></div><div><label>Base legal</label><strong>Execução de contrato</strong></div></div>
+        </article>
+      </div>
+    </section>
+    <section class="privacy-content" *ngIf="privacyTab === 'dpo'">
+      <p class="privacy-intro">O encarregado pelo tratamento de dados atua como canal de comunicação entre os titulares, a Clausula e a ANPD.</p>
+      <article class="dpo-card"><h2>Encarregado de Dados (DPO)</h2><p>Entre em contato pelo canal de privacidade da organização para dúvidas e solicitações relacionadas ao tratamento de dados pessoais.</p><button type="button">Enviar solicitação →</button></article>
+    </section>
+  </main>
+
+  <div class="privacy-banner" *ngIf="showPrivacy">
+    <span class="privacy-icon">▣</span>
+    <p>Este site utiliza cookies essenciais para seu funcionamento e, opcionalmente, cookies de análise para melhorar
+      sua experiência. Conforme a <b>LGPD (Lei 13.709/2018)</b>, você decide o que aceita. <a href="#privacidade">Saiba
+        mais</a></p>
+    <button type="button" (click)="showPrivacy = false">Somente essenciais</button>
+    <button class="accept" type="button" (click)="showPrivacy = false">Aceitar todos</button>
   </div>
-
-</main>
-
-<script>
-  function clickMenu() {
-
-    const itens = document.getElementById('itens');
-    itens.classList.toggle('aberto');
-  }
-
-</script>
+</div>
