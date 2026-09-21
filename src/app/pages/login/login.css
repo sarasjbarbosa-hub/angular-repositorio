@@ -211,3 +211,59 @@ button:active {
 .switch input:checked + .slider:before {
   transform: translateX(16px);
 }
+
+@media (max-width: 768px) {
+  main {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .carro-login {
+    flex: 0 0 32vh;
+    min-height: 220px;
+    padding: 16px;
+  }
+
+  .carro-login img {
+    width: min(85vw, 420px);
+    max-height: 230px;
+  }
+
+  .lado-direito-login {
+    flex: 1;
+    min-height: 68vh;
+    padding: 24px 18px 34px;
+  }
+
+  .logo-login {
+    margin-bottom: 18px;
+  }
+  .logo {
+    width: 110px;
+    margin: 0;
+    padding: 0;
+  }
+  form {
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .carro-login {
+    flex-basis: 27vh;
+    min-height: 180px;
+  }
+  .carro-login img {
+    max-height: 180px;
+  }
+  .lado-direito-login {
+    min-height: 73vh;
+    padding: 20px 16px 28px;
+  }
+  form h2 {
+    font-size: 22px;
+  }
+  button {
+    padding: 14px 24px;
+  }
+}

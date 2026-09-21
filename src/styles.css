@@ -254,3 +254,71 @@
     gap: 6px;
   }
 }
+
+@media (max-width: 780px) {
+  .contract-app {
+    overflow-x: hidden;
+  }
+  .contract-app .detail-header {
+    gap: 16px;
+  }
+  .contract-app .contract-facts {
+    gap: 18px 28px;
+  }
+  .contract-app .clauses-content,
+  .contract-app .detail-content {
+    max-width: none;
+  }
+  .privacy-page {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .contract-app .sidebar {
+    padding: 14px 12px;
+  }
+  .contract-app .sidebar nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
+  .contract-app .nav-item {
+    flex: 0 0 auto;
+  }
+  .contract-app .contract-list {
+    max-height: none;
+  }
+  .contract-app .contract-detail {
+    padding: 22px 14px 135px;
+  }
+  .contract-app .detail-header h2 {
+    font-size: 19px;
+  }
+  .contract-app .header-actions {
+    width: 100%;
+  }
+  .contract-app .header-actions button {
+    flex: 1;
+  }
+  .contract-app .contract-facts div {
+    min-width: 82px;
+  }
+  .contract-app .tabs {
+    gap: 20px;
+  }
+  .contract-app .clause-heading {
+    padding: 13px 12px;
+  }
+  .contract-app .clause-title {
+    gap: 5px;
+  }
+  .contract-app .simple-text,
+  .contract-app .original-text {
+    padding: 15px;
+  }
+  .contract-app .privacy-tabs {
+    gap: 16px;
+    overflow-x: auto;
+  }
+}
