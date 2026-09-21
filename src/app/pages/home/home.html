@@ -67,9 +67,15 @@
 
       <h3>Distribuição de risco</h3>
       <div class="risk-grid">
-        <div class="risk-card high"><span>● &nbsp;Alto</span><strong>2</strong><small>cláusulas</small></div>
-        <div class="risk-card medium"><span>● &nbsp;Médio</span><strong>2</strong><small>cláusulas</small></div>
-        <div class="risk-card low"><span>● &nbsp;Baixo</span><strong>1</strong><small>cláusula</small></div>
+        <div class="risk-card high"><span>●
+            &nbsp;Alto</span><strong>{{ currentContract.risk.high }}</strong><small>{{ currentContract.risk.high === 1 ? 'cláusula' : 'cláusulas' }}</small>
+        </div>
+        <div class="risk-card medium"><span>●
+            &nbsp;Médio</span><strong>{{ currentContract.risk.medium }}</strong><small>{{ currentContract.risk.medium === 1 ? 'cláusula' : 'cláusulas' }}</small>
+        </div>
+        <div class="risk-card low"><span>●
+            &nbsp;Baixo</span><strong>{{ currentContract.risk.low }}</strong><small>{{ currentContract.risk.low === 1 ? 'cláusula' : 'cláusulas' }}</small>
+        </div>
       </div>
 
       <h3>Atenção imediata</h3>
